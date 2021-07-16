@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+
+
+android {
+	compileSdkVersion 29
+	buildToolsVersion "29.0.3"
+	defaultConfig {
+		applicationId "com.thinkdev.audiorecorder"
+		minSdkVersion 21
+		targetSdkVersion 29
+		versionCode 1
+		versionName "1.0"
+	}
+
+
+
+	signingConfigs {
+		dev {
+			storeFile file('key/debug/debug.keystore')
+			storePassword 'android'
+			keyAlias 'androiddebugkey'
+			keyPassword 'android'
+		}
+
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled true
+			shrinkResources true
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+		}
+		debug {
+			minifyEnabled false
+		}
+	}
+
+	flavorDimensions "default"
+
+	productFlavors {
+
+		releaseConfig {
+
+			applicationId "com.thinkdev.audiorecorder"
+		}
+	}
+
+	compileOptions {
+		sourceCompatibility = JavaVersion.VERSION_1_8
+		targetCompatibility = JavaVersion.VERSION_1_8
+	}
+
+	lintOptions {
+		abortOnError false
+	}
+}
+
+// Remove not needed buildVariants.
+
+
+dependencies {
+	def androidX = "1.1.0"
+	def coroutines = "1.3.9"
+	def timber = "4.7.1"
+
+	//Kotlin
+	implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
+	implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
+
+	//Timber
+	implementation "com.jakewharton.timber:timber:$timber"
+	implementation "androidx.recyclerview:recyclerview:$androidX"
+	implementation 'com.google.android.gms:play-services-ads:19.7.0'
+	implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+
+
+}
